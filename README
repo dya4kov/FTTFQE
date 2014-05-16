@@ -1,0 +1,33 @@
+This is the source code which calculates the thermodynamic functions
+of electrons in the Thomas-Fermi model with quantum and exchange corrections.
+
+The usage is rather simple: you set the range of temperatures and 
+volume/density/concentration of atoms and get in the output the tables of 
+thermodynamic functions.
+
+The main functions to calculate are:
+-Pressure and thermal pressure
+-Energy and thermal energy
+-Entropy and thermal entropy
+-Chemical potential and thermal chemical potential
+
+It is also possible to calculate caloric EOS (E - 3/2PV), thermal (PV/T) and
+regions of validity. These features are not very useful in this version, but
+in the nearest future all functionality and documentation will be available.
+
+#-------------------------License Agreement------------------------------------#
+
+The usage of this code for the academic research purposes must have a reference 
+to the article:
+
+Sergey Dyachkov and Pavel Levashov 
+
+"Region of validity of the finite–temperature Thomas–Fermi model with respect to 
+quantum and exchange corrections", Physics of Plasmas, Vol. 21, 052702, (2014). 
+
+http://dx.doi.org/10.1063/1.4875737
+
+#------------------------------------------------------------------------------#
+
+current version: 1.0
+developed by Sergey Dyachkov
