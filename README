@@ -8,7 +8,7 @@ thermodynamic functions.
 The main functions to calculate are:
 -Pressure and thermal pressure
 -Energy and thermal energy
--Entropy and thermal entropy
+-Entropy
 -Chemical potential and thermal chemical potential
 
 It is also possible to calculate caloric EOS (E - 3/2PV), thermal (PV/T) and
@@ -17,15 +17,16 @@ in the nearest future all functionality and documentation will be available.
 
 #-------------------------License Agreement------------------------------------#
 
-The usage of this code for the academic research purposes must have a reference 
-to the article:
+The free of charge usage of this code is intended for academic research purposes
+only; in this case it must be acknowledged by the following reference:
 
-Sergey Dyachkov and Pavel Levashov 
+Sergey Dyachkov and Pavel Levashov,
+"Region of validity of the finite–temperature Thomas–Fermi model with respect to
+quantum and exchange corrections", Physics of Plasmas 21, 052702 (2014).
 
-"Region of validity of the finite–temperature Thomas–Fermi model with respect to 
-quantum and exchange corrections", Physics of Plasmas, Vol. 21, 052702, (2014). 
-
-http://dx.doi.org/10.1063/1.4875737
+For commercial use please contact the authors,
+Sergey Dyachkov, ceppera@gmail.com
+Pavel Levashov, pasha@ihed.ras.ru
 
 #------------------------------------------------------------------------------#
 
