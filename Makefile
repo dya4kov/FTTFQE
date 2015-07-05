@@ -1,54 +1,69 @@
-IDIR=./header
-LDIR=/usr/local/lib
+IDIR=./hdr
+LDIR=./lib
+ODIR=./obj
+BDIR=./bin
+SDIR=./src
+LOGDIR=./log
 CC=g++
 CFLAGS=-I$(IDIR)
-ODIR=./obj
-SDIR=./src
-LIBS=-lgsl -lgslcblas -lm
+LIBS=-lm
 
-_DEPS=Interface.h \
-      Model.h \
-      ODESolver.h \
-      ODESystem.h \
-      ODESystemList.h \
-      Solution.h \
-      SpecialFunctions.h \
-      ThermodynamicFunctions.h \
-      ThomasFermi.h \
-      ThomasFermiCorrection.h \
-      ThomasFermiPotential.h \
-      ThomasFermiPotentialCorrection.h \
-      Units.h
+TF_POT_OBJ=$(ODIR)/FTTFpotential.o
+TFQE_POT_OBJ=$(ODIR)/FTTFQEpotential.o
+TF_MOD_OBJ=$(ODIR)/FTTFmodel.o
+TFQE_MOD_OBJ=$(ODIR)/FTTFQEmodel.o
+Y_OBJ=$(ODIR)/Yfunction.o
+PRINT_OBJ=$(ODIR)/printer.o
+TIMER_OBJ=$(ODIR)/Timer.o
+PER_TABL_OBJ=$(ODIR)/periodicTableTest.o
 
-DEPS=$(patsubst %,$(IDIR)/%,$(_DEPS))
+objdir:
+	mkdir -p $(ODIR) 
 
-_OBJ=Interface.o \
-     main.o \
-     Model.o \
-     ODESystemList.o \
-     Solution.o \
-     SpecialFunctions.o \
-     ThermodynamicFunctions.o \
-     ThomasFermi.o \
-     ThomasFermiCorrection.o \
-     ThomasFermiPotential.o \
-     ThomasFermiPotentialCorrection.o
+bindir:
+	mkdir -p $(BDIR) 
 
-OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
+logdir:
+	mkdir -p $(LOGDIR)
 
-all: makeobjdir $(OBJ) fttfqe
+$(ODIR)/%.o: $(SDIR)/%.cpp $(DEPS)
+	$(CC) -c -o $@ $< -I$(IDIR)
 
-makeobjdir:
-	mkdir $(ODIR)
+FTTFpot: objdir bindir logdir $(TF_POT_OBJ) 
+	$(CC) -o $(BDIR)/$@ $(TF_POT_OBJ) $(LIBS)
 
-$(ODIR)/%.o: $(SDIR)/%.cpp $(DEPS) 
-	$(CC) -c -o $@ $< $(CFLAGS)
+FTTFpot: DEPS=$(TF_POT_DEPS)
 
-fttfqe: $(OBJ) 
-	$(CC) -o $@ $^ $(LIBS)
+FTTFQEpot: objdir bindir logdir $(TFQE_POT_OBJ) 
+	$(CC) -o $(BDIR)/$@ $(TFQE_POT_OBJ) $(LIBS)
+
+FTTFQEpot: DEPS=$(TFQE_POT_DEPS)	
+
+FTTFmodel: objdir bindir logdir $(TF_MOD_OBJ) 
+	$(CC) -o $(BDIR)/$@ $(TF_MOD_OBJ) $(LIBS)
+
+FTTFmodel: DEPS=$(TF_MOD_DEPS)
+
+FTTFQEmodel: objdir bindir logdir $(TFQE_MOD_OBJ) 
+	$(CC) -o $(BDIR)/$@ $(TFQE_MOD_OBJ) $(LIBS)
+
+FTTFQEmodel: DEPS=$(TFQE_MOD_DEPS)
+
+Ytest: objdir bindir $(Y_OBJ) 
+	$(CC) -o $(BDIR)/$@ $(Y_OBJ) $(LIBS)
+
+Ytest: DEPS=$(Y_DEPS)
+
+printTest: objdir bindir $(PRINT_OBJ) 
+	$(CC) -o $(BDIR)/$@ $(PRINT_OBJ) $(LIBS)
+
+timer: objdir bindir $(TIMER_OBJ) 
+	$(CC) -o $(BDIR)/$@ $(TIMER_OBJ) $(LIBS)
+
+periodicTableTest: objdir bindir $(PER_TABL_OBJ) 
+	$(CC) -o $(BDIR)/$@ $(PER_TABL_OBJ) $(LIBS)
 
 .PHONY: clean
 
 clean:
-	rm -rf $(ODIR) *~ $(IDIR)/*~ $(SDIR)/*~ fttfqe
-
+	rm -rf $(ODIR) *~ $(IDIR)/*~ $(SDIR)/*~ $(BDIR) $(LOGDIR)

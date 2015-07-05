@@ -1,34 +1,41 @@
-This is the source code which calculates the thermodynamic functions
-of electrons in the Thomas-Fermi model with quantum and exchange corrections.
-
-The usage is rather simple: you set the range of temperatures and 
-volume/density/concentration of atoms and get in the output the tables of 
-thermodynamic functions.
+This is the source code which calculates the thermodynamic functions of electrons in the Thomas-Fermi model with quantum and exchange corrections.
 
 The main functions to calculate are:
--Pressure and thermal pressure
--Energy and thermal energy
--Entropy
--Chemical potential and thermal chemical potential
-
-It is also possible to calculate caloric EOS (E - 3/2PV), thermal (PV/T) and
-regions of validity. These features are not very useful in this version, but
-in the nearest future all functionality and documentation will be available.
+- Pressure and thermal pressure
+- Energy and thermal energy
+- Entropy
+- Chemical potential and thermal chemical potential
 
 #-------------------------License Agreement------------------------------------#
 
-The free of charge usage of this code is intended for academic research purposes
-only; in this case it must be acknowledged by the following reference:
+The free of charge usage of this code is intended for academic research purposes only; in this case it must be acknowledged by the following reference:
 
 Sergey Dyachkov and Pavel Levashov,
-"Region of validity of the finite–temperature Thomas–Fermi model with respect to
-quantum and exchange corrections", Physics of Plasmas 21, 052702 (2014).
+"Region of validity of the finite–temperature Thomas–Fermi model with respect to quantum and exchange corrections", Physics of Plasmas 21, 052702 (2014).
 
 For commercial use please contact the authors,
-Sergey Dyachkov, ceppera@gmail.com
+
+Sergey Dyachkov, serj.dyachkov@gmail.com
 Pavel Levashov, pasha@ihed.ras.ru
 
 #------------------------------------------------------------------------------#
 
-current version: 1.0
+Compile and run:
+
+The code is adapted for usage only at *nix platforms.
+
+Before compilation, the 'numeric' library must be cloned into ./lib directory.
+Compilation may be prepared separately for Thomas-Fermi potential, correction to potential, FTTF model, and quantum and exchange corrections. Each binary file appears in ./bin directory. Typical commands:
+$ make FTTFpot - Thomas-Fermi potential
+$ make FTTFQEpot - quantum and exchange corrections to the Thomas-Fermi potential
+$ make FTTFmodel - the Thomas-Fermi model
+$ make FTTFQEmodel - the quantum and exchange corrections to the Thomas-Fermi model
+
+./in directory contains input files for running programm. ./out directory contains output files. Input and output files can be transferred as command line arguments (see run script). ./res directory contains files with tables of precalculated values of the Thomas-Fermi potential and its correction for acceleration. Simple periodic table of elements (with charge and atomic mass) is also included.
+
+For debug or additional information it is possible to turn on writing log files in command line arguments. The information will appear in ./log directory. FTTFmodel and FTTFQEmodel have 2 levels of log writing: general information (1) and log for each point (2). 
+
+Typical run commands are gathered in run script.
+
+current version: 2.0
 developed by Sergey Dyachkov
