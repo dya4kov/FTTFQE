@@ -24,7 +24,15 @@ Compile and run:
 
 The code is adapted for usage only at *nix platforms.
 
-Before compilation, the 'numeric' library must be cloned into ./lib directory.
+First, clone project:
+$ git clone https://github.com/dya4kov/FTTFQE
+$ cd FTTFQE
+
+Before compilation, the 'numeric' library must be cloned into ./lib directory:
+$ mkdir lib
+$ cd lib
+$ git clone https://github.com/dya4kov/numeric
+
 Compilation may be prepared separately for Thomas-Fermi potential, correction to potential, FTTF model, and quantum and exchange corrections. Each binary file appears in ./bin directory. Typical commands:
 $ make FTTFpot - Thomas-Fermi potential
 $ make FTTFQEpot - quantum and exchange corrections to the Thomas-Fermi potential
